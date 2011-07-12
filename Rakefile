@@ -1,6 +1,9 @@
-    require 'erb'
-    require 'pathname'
 
+require 'erb'
+require 'pathname'
+require 'term/ansicolor'
+# including here gives us easy text colouring
+include Term::ANSIColor
 
 namespace :wp do 
 
@@ -23,6 +26,13 @@ namespace :wp do
   desc "clear up wordpress"
   task  :clear_up do
     sh "rm -rf latest.tar.gz"
+  end
+
+  desc "clear apache conf files"
+  task  :clear_up_apache_conf_files do
+    sitename = "codingfrustrations.dev"
+    sh "rm -rf /etc/apache2/sites-available/#{sitename}.conf"
+    sh "rm -rf /etc/apache2/sites-enabled/#{sitename}.conf"
   end
 
   desc "create apache conf file"
@@ -50,6 +60,13 @@ namespace :wp do
     sitename = "codingfrustrations.dev"
     FileUtils.symlink "/etc/apache2/sites-available/#{sitename}.conf", "/etc/apache2/sites-enabled/#{sitename}.conf"
   end
+
+  desc "Set up apache site"
+  task :set_up_apache_site => [:clear_up_apache_conf_files, :make_apache_conf, :move_conf_file, :symlink_generated_apache_conf] do
+    print green "Apache site now set up. Time to make your database, and get coding!"
+    
+  end
+
 end
 
 
