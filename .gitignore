@@ -1,3 +1,4 @@
+/* The contents of this gitignore file is largely based on this repo - https://github.com/github/gitignore*/
 
 /* wordpress specific*/
 wordpress/.htaccess
@@ -24,6 +25,8 @@ wordpress/wp-settings.php
 wordpress/wp-signup.php
 wordpress/wp-trackback.php
 wordpress/xmlrpc.php
+wordpress/readme.html
+wordpress/license.txt
 wordpress/wp-admin/
 wordpress/wp-includes/
 wordpress/wp-content/uploads/
