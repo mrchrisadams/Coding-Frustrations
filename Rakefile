@@ -69,4 +69,25 @@ namespace :wp do
 
 end
 
+namespace db do
 
+  desc "create database"
+  task :create do
+    sh "mysqladmin create coding_frustrations_dev -u root --password=''"
+  end
+  
+  desc "Destroy database"
+  task :destroy do
+    sh "yes | mysqladmin drop coding_frustrations_dev -u root --password=''"
+  end
+
+  desc "Backup db to sqldump"
+  task :backup do
+    # create a sane timestamp
+    # TODO compress the dump before putting it into the db directory
+    timestamp = Time.now.strftime("%Y-%m-%m-%H-%M")
+    sh "mysqldump coding_frustrations_dev -u root --password='' > db/timestamp.sql"
+  end
+
+
+end
