@@ -69,7 +69,7 @@ namespace :wp do
 
 end
 
-namespace db do
+namespace :db do
 
   desc "create database"
   task :create do
